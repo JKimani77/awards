@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http  import HttpResponse
 
 # Create your views here.
-def welcome(request):
+def home(request):
     return HttpResponse('Welcome to the Awards')
 
 # Create your views here.

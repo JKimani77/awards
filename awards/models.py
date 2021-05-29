@@ -49,3 +49,14 @@ class Project(models.Model):
         self.save()
     def del_proj(self):
         self.delete()
+
+
+class Review(models.Model):
+    design = models.IntegerField()
+    content = models.IntegerField()
+    usability = models.IntegerField()
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def save_review(self):
+        self.save()

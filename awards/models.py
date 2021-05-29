@@ -60,3 +60,12 @@ class Review(models.Model):
 
     def save_review(self):
         self.save()
+
+
+class Follow(models.Model):
+    posted = models.DateTimeField(auto_now_add=True)
+    followedd = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="profile_followed")
+    followingg = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="profile_following")
+
+    def __str__(self):
+        return self.pk

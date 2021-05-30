@@ -11,7 +11,7 @@ Joshua Kimani
 
 
 ## DB diagram
-![Ahwards](https://github.com/JKimani77/mmadig-ar-tg-z/blob/master/raw/Screenshot (35).png?raw=true)
+![Ahwards](https://github.com/JKimani77/mmadig-ar-tg-z/blob/master/raw/dbdiagram.png?raw=true)
 
 
 

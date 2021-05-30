@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 
@@ -6,7 +6,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.login, name = 'login'),
     path('createprofile/', views.make_profile, name = 'createprofile'),
-    path('profile/<int:id>/', views.view_profile, name = 'myprofile'),
+    re_path('profile/(?P<prof_id>\d+)/',views.view_profile,name = 'myprofile'),
+    #path('profile/<int:id>/', views.view_profile, name = 'myprofile'),
     path('post/',views.posting_project, name='post'),
-
+    path('logout/',views.logout_user, name='logout'),
 ]

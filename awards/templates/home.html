@@ -4,21 +4,21 @@
 <section class="jumbotron text-center">
     <div class="container">
         
-        <p style="font-size: 45px; font-family:fantasy ;" class="lead text-muted">REVIEW PROJECTS AND GET YOUR REVIEWED!</p>
+        <p style="font-size: 45px; font-family:fantasy ;" class="lead text-muted">REVIEW PROJECTS AND GET YOURS REVIEWED!</p>
         
       </div>
       </section>
       <div class="album py-5 bg-dark">
         <div class="container">
           <div class="row">
-            {%for project in projects%}
+            {%for i in projects%}
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="">
                 <div class="card-body">
-                  <p class="card-text">{{project.title}}</p>
-                  <p class="card-text">{{project.description}}</p>
-                  <a href="">{{project.project_link}}</a>
+                  <p class="card-text">{{i.title}}</p>
+                  <p class="card-text">{{i.description}}</p>
+                  <a href="">{{i.project_link}}</a>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a href="" type="button" class="btn btn-sm btn-outline-success">Rate</a>

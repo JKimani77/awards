@@ -11,13 +11,13 @@
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li style="margin-top: 50px;" class="nav-item">
-          <a class="nav-link" href="/">Profile</a>
+          <a class="nav-link" href="profile/{{request.user.id}}/">{{ user.username }}</a>
         </li>
         <li style="margin-top: 50px;" class="nav-item">
-          <a class="nav-link" href="{%url 'post'%">Submit Project</a>
+          <a class="nav-link" href="{%url 'post'%}">Submit Project</a>
         </li>
         <li style="margin-top: 50px;" class="nav-item">
-          <a class="nav-link" href="">Logout</a>
+          <a class="nav-link" href="/logout">Logout</a>
         </li>
         
 
@@ -26,7 +26,7 @@
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         
         <li style="margin-top: 50px;" class="nav-item">
-          <a class="nav-link" href="/accounts/login">Login</a>
+          <a class="nav-link" href="/login">Login</a>
         </li>
 
         <li style="margin-top: 50px;"class="nav-item">

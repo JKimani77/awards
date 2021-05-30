@@ -17,8 +17,8 @@ class Profile(models.Model):
         self.delete()
 
     @classmethod
-    def get_profileid(cls,id):
-        profile = cls.objects.filter(id=id).all()
+    def get_profileid(cls,user):
+        profile = cls.objects.filter(user=user).all()
         return Profile
     def updtprofile(self,bio):
         self.bio = bio
@@ -43,12 +43,18 @@ class Project(models.Model):
     def get_projid(cls,id):
         project  = cls.objects.filter(id=id).all()
         return project
+
+    @classmethod
+    def get_user_projects(cls,profile):
+        return cls.objects.filter(profile=profile)
     
     def updateproj(self, project_title):
         self.project_title = project_title
         self.save()
     def del_proj(self):
         self.delete()
+
+
 
 
 class Review(models.Model):

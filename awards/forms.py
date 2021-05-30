@@ -16,3 +16,8 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(label='Password',widget=forms.PasswordInput)
 
 
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ('profile_pic','bio','user')

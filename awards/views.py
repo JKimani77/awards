@@ -53,7 +53,7 @@ def view_profile(request, id):
     projects = Project.objects.filter(profile=joemama.profile.id).all()
     return render(request, 'profile.html',{"profile":profile, "projects":projects})
 
-def post(request):
+def posting_project(request):
     joemama = request.user
     if request.method=="POST":
         form = ProjectForm(request.POST,request.FILES)

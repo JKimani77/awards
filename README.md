@@ -1,4 +1,4 @@
-# Awwwards Clone
+# Ahwards
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![codebeat badge](https://codebeat.co/badges/7283d5cd-8963-4679-844b-a5c915ab09e0)]
 ## Description
@@ -11,7 +11,7 @@ Joshua Kimani
 
 
 ## DB diagram
-![Awwwards]()
+![Ahwards](https://github.com/JKimani77/mmadig-ar-tg-z/blob/master/raw/Screenshot (35).png?raw=true)
 
 
 

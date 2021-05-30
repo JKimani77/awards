@@ -1,7 +1,7 @@
 from django.http  import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
-from .forms import RegForm,LoginForm,ProjectForm,ProfileForm
+from .forms import LoginForm,ProjectForm,ProfileForm,RatingForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from .models import Profile, Project, Review
@@ -87,3 +87,27 @@ def posting_project(request):
     else:
         form=ProjectForm()
     return render(request, 'newpost.html',{"form": form})
+
+def search(request):
+    if 'project'in request.GET and request.GET['project']:
+        search_project = request.GET.get('project')
+        searched = Project.search_proj(search_project)
+        message = f'{search_project}'
+        return render(request, 'search_project.html',{"projects":searched, "message":message})
+    
+def review(request, id):
+    current_user = request.user
+    project = Project.objects.get(pk=id)
+    rating = Review.objects.filter(project=project.id).all()
+    if request.method=='POST':
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user = current_user
+            rating.project = project
+            rating.save_review()
+            return redirect(home)
+        
+    else:
+        form = RatingForm()
+    return render(request, 'rating.html', {"form":form, "project":project, "ratings":rating})

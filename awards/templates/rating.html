@@ -1,0 +1,21 @@
+{%extends 'auth/base.html'%}
+{%load bootstrap4 %}
+{%block content %}
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <h1>Review this project by rating with the criteria below</h1>
+    <div class="col-md-12 mt-4 mx-auto">
+
+<form  action="{%url 'review' id=project.id %}" method="POST">
+    {%csrf_token%}
+
+    {% bootstrap_form form %}
+    <input type="submit" class="btn btn-primary btn-lg" value="RATE">
+  </form>
+  </div>
+</div>
+</div>
+{%endblock%}

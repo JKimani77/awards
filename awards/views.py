@@ -8,6 +8,8 @@ from .models import Profile, Project, Review
 #from rest_framework.response import Response
 #from rest_framework.views import APIView
 #from .serializers import ProjectSerializer,
+#from rest_framework.views import APIView
+
 
 # Create your views here.
 def home(request):
@@ -111,3 +113,16 @@ def review(request, id):
     else:
         form = RatingForm()
     return render(request, 'rating.html', {"form":form, "project":project, "ratings":rating})
+
+
+#class ProjectList(APIView):
+    #def get(self, request, format=None):
+        #all_projects = Project.objects.all()
+        #serializers = ProjectSerializer(all_projects, many=True)
+        #return Response(serializers.data)
+    
+#class ProfileList(APIView):
+    #def get(self, request, format=None):
+        #all_profiles = Profile.objects.all()
+        #serializers = ProfileSerializer(all_profiles, many=True)
+        #return Response(serializers.data)

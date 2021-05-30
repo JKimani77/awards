@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http  import HttpResponse
 from django.shortcuts import render,redirect
-#from .forms import SignUpForm,LoginForm, ProfileForm, ProjectForm, RatingForm
+from .forms import RegForm,LoginForm
 from django.contrib.auth import login,logout,authenticate
 from .models import Profile, Project, Review
 #from rest_framework.response import Response
@@ -31,7 +31,7 @@ def login(request):
                 return "Your account is inactive"
     else:
         form = LoginForm()
-    return render(request, 'auth/login.html',{"form":form})
+    return render(request, 'registration/login.html',{"form":form})
 
 
 # Create your views here.

@@ -1,4 +1,4 @@
-<nav style="margin-top: 200px;" class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav style="margin-top: -32px;" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,11 +13,16 @@
         <li style="margin-top: 50px;" class="nav-item">
           <a class="nav-link" href="profile/{{request.user.id}}/">{{ user.username }}</a>
         </li>
+        
         <li style="margin-top: 50px;" class="nav-item">
           <a class="nav-link" href="{%url 'post'%}">Submit Project</a>
         </li>
         <li style="margin-top: 50px;" class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>
+        </li>
+
+        <li style="margin-top: 50px; margin-left: 700px;" class="nav-item">
+          <a class="nav-link" href="{% url 'createprofile'%}">UpdateProfile</a>
         </li>
         
 
@@ -34,7 +39,7 @@
         </li>
       </ul>
       {%endif%}
-      <form method="GET" action="" class="form-inline my-2 my-lg-0">
+      <form method="GET" action="{% url 'search-project'%}" class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" name="project" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>

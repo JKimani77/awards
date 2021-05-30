@@ -6,14 +6,14 @@
 <br>
 <div class="container">
   <div class="row">
-    <h1 style="color: rgb(112, 112, 112);" >Add your profile picture and status</h1>
+    <h1 style="color: rgb(112, 112, 112);" >Add your profile picture and status. Create profile once and go to your profile page to see the uploaded image</h1>
     <div class="col-md-12 mt-4 mx-auto">
 
 <form  action="{%url 'createprofile'%}" method="POST" enctype="multipart/form-data">
     {%csrf_token%}
 
     {% bootstrap_form form %}
-    <input type="submit" class="btn btn-primary btn-lg" value="profile">
+    <input type="submit" class="btn btn-primary btn-lg" value="ClickBait">
   </form>
   </div>
 </div>

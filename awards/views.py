@@ -52,40 +52,25 @@ def make_profile(request):
         form = ProfileForm()
     return render(request, 'createprofile.html',{"form":form})
 
-def view_profile(request, prof_id):
-    try:
-        user = User.objects.get(pk=prof_id)
-        profile = Profile.objects.get(user=user)
-        projects = Project.get_user_projects(profile.id)
-        project_count = projects.count()
-
-    except Profile.DoesNotExist:
-        raise Http404()
-    return render(request, 'profile.html',{"profile":profile, "projects":projects})
-
-#def posting_project(request):
-    #joemama = request.user
-    #if request.method=="POST":
-        #form = ProjectForm(request.POST,request.FILES)
-        #if form.is_valid():
-            #project = form.save(commit=False)
-            #rin)
-            #project.profile = joemama.profile
-            #project.save_proj()
-            #return redirect(home)
-    #else:
-        #form = ProjectForm()
-    #return render(request, 'newpost.html',{"form":form})
+def view_profile(request, id):
+    
+    #current_user = request.user
+    profile = Profile.objects.filter(user_id = id).all()
+    #projects = Project.objects.filter(profile=current_user.profile.id).all()
+    #project_count = projects.count()
+    return render(request, 'profile.html',{"profile":profile}) #{"projects":projects})
 
 @login_required(login_url="login/")
 def posting_project(request):
-    if request.method == "POST":
-        form = ProjectForm(request.POST, request.FILES)
+    current_user = request.user
+    if request.method=="POST":
+        form = ProjectForm(request.POST,request.FILES)
         if form.is_valid():
-            project = form.save(commit=False)
-            project.user = request.user
-            project.save()
-            return redirect('home')
+            form.save(commit=False)
+            #projectx = Project()
+            #projectx.user = current_user
+            #projectx.save_proj()
+            return redirect(home)
     else:
         form=ProjectForm()
     return render(request, 'newpost.html',{"form": form})
@@ -95,7 +80,7 @@ def search(request):
         search_project = request.GET.get('project')
         searched = Project.search_proj(search_project)
         message = f'{search_project}'
-        return render(request, 'search_project.html',{"projects":searched, "message":message})
+        return render(request, 'search.html',{"projects":searched, "message":message})
     
 def review(request, id):
     current_user = request.user
@@ -126,3 +111,691 @@ def review(request, id):
         #all_profiles = Profile.objects.all()
         #serializers = ProfileSerializer(all_profiles, many=True)
         #return Response(serializers.data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#def posting_project(request):
+    #joemama = request.user
+    #if request.method=="POST":
+        #form = ProjectForm(request.POST,request.FILES)
+        #if form.is_valid():
+            #project = form.save(commit=False)
+            #rin)
+            #project.profile = joemama.profile
+            #project.save_proj()
+            #return redirect(home)
+    #else:
+        #form = ProjectForm()
+    #return render(request, 'newpost.html',{"form":form})

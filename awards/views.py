@@ -15,4 +15,23 @@ def home(request):
 
     return render(request, 'home.html',{'projects':projects})
 
+def login(request):
+    if request.method=='POST':
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            
+            user = authenticate(request, username=username,password=password)
+            
+            if user.is_active:
+                login(request,user)
+                return redirect(home)
+            else:
+                return "Your account is inactive"
+    else:
+        form = LoginForm()
+    return render(request, 'auth/login.html',{"form":form})
+
+
 # Create your views here.

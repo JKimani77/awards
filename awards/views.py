@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http  import HttpResponse
 from django.shortcuts import render,redirect
-from .forms import RegForm,LoginForm,ProfileForm
+from .forms import RegForm,LoginForm,ProjectForm,ProfileForm
 from django.contrib.auth import login,logout,authenticate
 from .models import Profile, Project, Review
 #from rest_framework.response import Response
@@ -46,4 +46,22 @@ def make_profile(request):
     else:
         form = ProfileForm()
     return render(request, 'createprofile.html',{"form":form})
-# Create your views here.
+
+def view_profile(request, id):
+    joemama = request.user
+    profile = Profile.objects.filter(user_id=id).all()
+    projects = Project.objects.filter(profile=joemama.profile.id).all()
+    return render(request, 'profile.html',{"profile":profile, "projects":projects})
+
+def post(request):
+    joemama = request.user
+    if request.method=="POST":
+        form = ProjectForm(request.POST,request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.profile = joemama.profile
+            project.save_project()
+            return redirect(home)
+    else:
+        form = ProjectForm()
+    return render(request, 'newpost.html',{"form":form})

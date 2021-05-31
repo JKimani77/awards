@@ -30,7 +30,7 @@ MODE=config("MODE", default="dev")
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 #emailconfig
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True)
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')

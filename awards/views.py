@@ -69,7 +69,6 @@ def posting_project(request):
             project = Project()
             project.uploded(request.FILES[''])
             return redirect('home')
-
             #project = form.save(commit=False)
             #project.user = request.user
             #profileid = Profile.objects.filter(id).update() 

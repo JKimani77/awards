@@ -32,7 +32,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 #emailconfig
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True)
 EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_PORT = '587'
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 

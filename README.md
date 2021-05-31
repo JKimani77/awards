@@ -9,6 +9,8 @@ This a web application built using Python, Django and Postgresql.The app is a cl
 
 Joshua Kimani
 
+##Link to site
+![Go]( https://ahwards.herokuapp.com/)
 
 ## DB diagram
 ![Ahwards](https://github.com/JKimani77/awards/blob/master/raw/db.png?raw=true)

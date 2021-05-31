@@ -1,13 +1,13 @@
 from django.http  import Http404
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from .forms import LoginForm,ProjectForm,ProfileForm,RatingForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from .models import Profile, Project, Review
 #from rest_framework.response import Response
 #from rest_framework.views import APIView
-#from .serializers import ProjectSerializer,
+#from .serializers import ProjectSerializer,ProfileSerialiser
 #from rest_framework.views import APIView
 
 
@@ -62,18 +62,22 @@ def view_profile(request, id):
 
 @login_required(login_url="login/")
 def posting_project(request):
-    current_user = request.user
-    if request.method=="POST":
-        form = ProjectForm(request.POST,request.FILES)
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(commit=False)
-            #projectx = Project()
+           
+            project = form.save(commit=False)
+            project.user = request.user
+            profileid = Profile.objects.filter(id).update() 
+            project.save()
+            return redirect('home')
+                     #projectx = Project()
             #projectx.user = current_user
             #projectx.save_proj()
-            return redirect(home)
+            
     else:
         form=ProjectForm()
-    return render(request, 'newpost.html',{"form": form})
+    return render(request, 'newpost.html',{"form": form })#"project":project
 
 def search(request):
     if 'project'in request.GET and request.GET['project']:

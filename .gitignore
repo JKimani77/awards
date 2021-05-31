@@ -1,4 +1,5 @@
 /virtualenv
 pyc
 /vscode
-.env
+/.env
+

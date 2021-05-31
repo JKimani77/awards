@@ -59,6 +59,7 @@ def view_profile(request, id):
     #projects = Project.objects.filter(profile=current_user.profile.id).all()
     #project_count = projects.count()
     return render(request, 'profile.html',{"profile":profile}) #{"projects":projects})
+    #sd
 
 @login_required(login_url="login/")
 

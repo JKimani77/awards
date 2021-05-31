@@ -1,10 +1,10 @@
-from django.http  import Http404
+from django.http  import Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,HttpResponse
 from .forms import LoginForm,ProjectForm,ProfileForm,RatingForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
-from .models import Profile, Project, Review
+from .models import *
 #from rest_framework.response import Response
 #from rest_framework.views import APIView
 #from .serializers import ProjectSerializer,ProfileSerialiser
@@ -61,16 +61,21 @@ def view_profile(request, id):
     return render(request, 'profile.html',{"profile":profile}) #{"projects":projects})
 
 @login_required(login_url="login/")
+
 def posting_project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-           
-            project = form.save(commit=False)
-            project.user = request.user
-            profileid = Profile.objects.filter(id).update() 
-            project.save()
+            project = Project()
+            project.uploded(request.FILES[''])
             return redirect('home')
+
+
+            #project = form.save(commit=False)
+            #project.user = request.user
+            #profileid = Profile.objects.filter(id).update() 
+            #project.save()
+            
                      #projectx = Project()
             #projectx.user = current_user
             #projectx.save_proj()

@@ -36,7 +36,11 @@ class Project(models.Model):
 
     def save_proj(self):
         self.save()
-    
+        
+    def uploded(f):
+        with open('/awards/forms.py', 'wb+') as destination:
+            for i in f.profile():
+                destination.write(i)
 
     @classmethod
     def search_proj(cls, search_queri):
@@ -51,9 +55,11 @@ class Project(models.Model):
     def get_user_projects(cls,profile):
         return cls.objects.filter(profile=profile)
     
-    def updateproj(self, project_title):
+    def updateproj(self, project_title,profile):
         self.project_title = project_title
+        self.profile = profile
         self.save()
+
     def del_proj(self):
         self.delete()
 

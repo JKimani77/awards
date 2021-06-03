@@ -7,7 +7,7 @@ from django.contrib.auth import login,logout,authenticate
 from .models import *
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import ProjectSerializer,ProfileSerialiser
+from .serializers import *
 from rest_framework.views import APIView
 # need
 
@@ -107,17 +107,17 @@ def review(request, id):
     return render(request, 'rating.html', {"form":form, "project":project, "ratings":rating})
 
 
-#class ProjectList(APIView):
-    #def get(self, request, format=None):
-        #all_projects = Project.objects.all()
-        #serializers = ProjectSerializer(all_projects, many=True)
-        #return Response(serializers.data)
+class ProjectList(APIView):
+    def get(self, request, format=None):
+        all_projects = Project.objects.all()
+        serializers = ProjectSerializer(all_projects, many=True)
+        return Response(serializers.data)
     
-#class ProfileList(APIView):
-    #def get(self, request, format=None):
-        #all_profiles = Profile.objects.all()
-        #serializers = ProfileSerializer(all_profiles, many=True)
-        #return Response(serializers.data)
+#lass ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many=True)
+        return Response(serializers.data)
 
 
 

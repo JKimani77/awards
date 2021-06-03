@@ -16,7 +16,7 @@
   <form action='/accounts/login/' method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
-      <button type="submit" class="btn btn-primary">登录</button>
+      <button type="submit" class="btn btn-primary">Login</button>
       <a href="/accounts/register">Don't have an account?</a>
       <input type="hidden" name="next" value="/">
     </form>

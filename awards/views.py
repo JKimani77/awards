@@ -5,13 +5,13 @@ from .forms import LoginForm,ProjectForm,ProfileForm,RatingForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from .models import *
-#from rest_framework.response import Response
-#from rest_framework.views import APIView
-#from .serializers import ProjectSerializer,ProfileSerialiser
-#from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import ProjectSerializer,ProfileSerialiser
+from rest_framework.views import APIView
 # need
 
-# Create your views here.
+
 def home(request):
     projects = Project.objects.all()
 
@@ -54,10 +54,10 @@ def make_profile(request):
 
 def view_profile(request, id):
     
-    #current_user = request.user
+    current_user = request.user
     profile = Profile.objects.filter(user_id = id).all()
-    #projects = Project.objects.filter(profile=current_user.profile.id).all()
-    #project_count = projects.count()
+    projects = Project.objects.filter(profile=current_user.profile.id).all()
+    project_count = projects.count()
     return render(request, 'profile.html',{"profile":profile}) #{"projects":projects})
     #sd 
     ##
@@ -65,25 +65,23 @@ def view_profile(request, id):
 @login_required(login_url="login/")
 
 def posting_project(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ProjectForm(request.POST, request.FILES)
+        current_user=request.user
+        try:
+            profile = Profile.objects.get(user=current_user)
+        except Profile.DoesNotExist:
+            raise Http404()
         if form.is_valid():
-            project = Project()
-            project.uploded(request.FILES[''])
+            project = form.save(commit=False)
+            project.profile = profile
+            project.save()
             return redirect('home')
-            #project = form.save(commit=False)
-            #project.user = request.user
-            #profileid = Profile.objects.filter(id).update() 
-            #project.save()
-            
-                     #projectx = Project()
-            #projectx.user = current_user
-            #projectx.save_proj()
-            
     else:
         form=ProjectForm()
     return render(request, 'newpost.html',{"form": form })#"project":project
 
+#
 def search(request):
     if 'project'in request.GET and request.GET['project']:
         search_project = request.GET.get('project')

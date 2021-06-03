@@ -13,3 +13,5 @@ urlpatterns = [
     path('search/', views.search,name='search-project'),
     path('rating/<int:id>',views.review, name='review'),
 ]
+
+#

@@ -33,7 +33,7 @@ class Project(models.Model):
     project_link = models.URLField()
     whenposted = models.DateTimeField(auto_now_add=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
+#
     def save_proj(self):
         self.save()
         

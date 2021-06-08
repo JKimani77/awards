@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{%load bootstrap4 %}
+{%block content %}
+<div class="container">
+    <div class="row">
+        <div class="card mt-4" style="width: 100rem; margin-right: auto;">
+            <img class="card-img-top" src="{{project.project_pic.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{project.title}}</h5>
+              <p class="card-text">{{project.description}}</p>
+              <p class="card-text">Posted by:{{project.profile.user.username}}</p>
+          </div>  
+      </div>
+    </div>
+    <br>
+    <br>
+    {%for r in ratings%}
+    <div class="row">
+        <div class="card mt-4" style="width: 20rem; margin-right:50px;">
+            <div class="card-body">
+              <h5 class="card-title">{{r.project.title}}</h5>
+              <p class="card-text">Usability:{{r.usability}}</p>
+              <p class="card-text">Design:{{r.design}}</p>
+              <p class="card-text">Content: {{r.content}}</p>
+              <p class="card-text">Posted by:{{r.user.username}}</p>
+          </div>  
+      </div>
+      {%endfor%}
+    </div>
+         
+    
+</div>
+<div class="card mt-5" style="width: 20rem;">  
+  <h3>Overall score:{{total_score}}</h3>
+</div>
+<br>
+
+{%endblock%}

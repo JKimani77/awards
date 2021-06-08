@@ -1,14 +1,17 @@
 from django.http  import Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,HttpResponse
-from .forms import LoginForm,ProjectForm,ProfileForm,RatingForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
+
 from .models import *
+from .serializers import *
+from .forms import LoginForm,ProjectForm,ProfileForm,RatingForm
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import *
-from rest_framework.views import APIView
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import permissions 
 # need
 
 
@@ -33,11 +36,12 @@ def login(request):
                 return "Your account is inactive"
     else:
         form = LoginForm()
-    return render(request, 'auth/login.html',{"form":form})
+    return render(request, 'registration/login.html',{"form":form})
 
 def logout_user(request):
     logout(request)
     return redirect(home)
+    #
 
 def make_profile(request):
     joemama = request.user
@@ -55,12 +59,11 @@ def make_profile(request):
 def view_profile(request, id):
     
     current_user = request.user
-    profile = Profile.objects.filter(user_id = id).all()
-    projects = Project.objects.filter(profile=current_user.profile.id).all()
-    project_count = projects.count()
+    profile = Profile.objects.filter(user = id).all()
+    #projects = Project.objects.filter(profile=current_user.profile.id).all()
+    #project_count = projects.count()
     return render(request, 'profile.html',{"profile":profile}) #{"projects":projects})
-    #sd 
-    ##
+    
 
 @login_required(login_url="login/")
 
@@ -71,12 +74,12 @@ def posting_project(request):
         try:
             profile = Profile.objects.get(user=current_user)
         except Profile.DoesNotExist:
-            raise Http404()
+            raise Http404("the user profile does not exist")
         if form.is_valid():
             project = form.save(commit=False)
             project.profile = profile
             project.save()
-            return redirect('home')
+        return redirect('home')
     else:
         form=ProjectForm()
     return render(request, 'newpost.html',{"form": form })#"project":project
@@ -106,18 +109,42 @@ def review(request, id):
         form = RatingForm()
     return render(request, 'rating.html', {"form":form, "project":project, "ratings":rating})
 
+def ratetotal(request,id):
+    project = Project.objects.get(pk=id)
+    ratings = Review.objects.filter(project=project.id).all()
+    design = Review.objects.filter(project=project.id).values_list('design',flat=True)
+    usability = Review.objects.filter(project=project.id).values_list('usability',flat=True)
+    content = Review.objects.filter(project=project.id).values_list('content',flat=True)
+    total_design=0
+    total_usability=0
+    total_content = 0
+    for score in design:
+        total_design+=score
+    for score in usability:
+        total_usability+=score
+    for score in content:
+        total_content+=score
+        
+        
+    total_score = (total_design + total_usability + total_content)/3
+    return render(request, 'ratingtotal.html',{"project":project, "ratings":ratings,"total_score":total_score})
 
 class ProjectList(APIView):
     def get(self, request, format=None):
         all_projects = Project.objects.all()
-        serializers = ProjectSerializer(all_projects, many=True)
+        serializers = ProjectSerializer(all_projects, many=True)       
         return Response(serializers.data)
-    
-#lass ProfileList(APIView):
+
+
+
+@permission_classes((permissions.AllowAny,))
+class ProfileList(APIView):
     def get(self, request, format=None):
         all_profiles = Profile.objects.all()
         serializers = ProfileSerializer(all_profiles, many=True)
         return Response(serializers.data)
+
+    
 
 
 

@@ -15,7 +15,19 @@ https://ahwards.herokuapp.com/
 ## DB diagram
 ![Ahwards](https://github.com/JKimani77/awards/blob/master/raw/db.png?raw=true)
 
+## User Stories
 
+A user can register and login
+![DBDIAGRAM](https://github.com/JKimani77/awards/blob/master/raw/login.png?raw=true)
+
+A user can create their own profile to be able to post
+![DBDIAGRAM](https://github.com/JKimani77/awards/blob/master/raw/profile.png?raw=true)
+
+A user can View Projects posted and rate them
+![DBDIAGRAM](https://github.com/JKimani77/awards/blob/master/raw/viewposted.png?raw=true)
+
+A user can visit the wevbsite link.
+![DBDIAGRAM](https://github.com/JKimani77/awards/blob/master/raw/gotosite.png?raw=true)
 
 # Installation
 
@@ -63,6 +75,8 @@ https://ahwards.herokuapp.com/
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+Reach me at jkkimani77@gmail.com
 
 ## Technologies Used
     Python Shell

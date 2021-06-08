@@ -15,6 +15,31 @@ https://ahwards.herokuapp.com/
 ## DB diagram
 ![Ahwards](https://github.com/JKimani77/awards/blob/master/raw/db.png?raw=true)
 
+
+## API Reference
+
+#### Get all profile objects
+
+```http
+  GET /api/profile
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. Your API key |
+
+#### Get profile object by id
+
+```http
+  GET /api/profile/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of item to fetch |
+
+
+
 ## User Stories
 
 A user can register and login
@@ -48,6 +73,20 @@ A user can visit the wevbsite link.
    $ pip install - requirements.txt
     
 ```
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`SECRET_KEY`
+`MODE`
+`DATABASE_URL`
+`DEBUG`
+`DB_NAME`
+`DB_USERNAME`
+`DB_PASSWORD`
+`DB_PORT`
+`ALLOWED_HOSTS`
+
 ## Run initial migration
 ```bash
    $ python3.6 manage.py makemigrations awards
@@ -64,6 +103,8 @@ A user can visit the wevbsite link.
 
 ## Test class
 
+  ---You will need to change the database_url env variable to your local database or change your mode to 'dev and configure the database evnironment vars.'
+  
 ```bash
     $ python3 manage.py test
 ```
